@@ -26,6 +26,7 @@ export default function CandidateSolvePage() {
     const [ticket, setTicket] = useState<Ticket | null>(null);
     const [status, setStatus] = useState("loading"); // loading | ready | error
     const [solution, setSolution] = useState("");
+    const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [evaluation, setEvaluation] = useState<any>(null);
     const router = useRouter();
@@ -52,7 +53,14 @@ export default function CandidateSolvePage() {
 
     const handleSubmit = async () => {
         if (!solution.trim()) return;
+
+        if (!email.trim() || !email.includes('@')) {
+            alert("Please enter a valid email address to submit.");
+            return;
+        }
+
         setIsSubmitting(true);
+        
         try {
             const context = `
                 Title: ${ticket?.title}
@@ -61,7 +69,16 @@ export default function CandidateSolvePage() {
             `;
 
             const result = await evaluate(context, solution);
+
+            await addDoc(collection(db, "submissions"), {
+                ticketId: id,
+                solution: solution,
+                evaluation: result,
+                createdAt: new Date().toISOString(),
+                candidateEmail: email,
+            });
             setEvaluation(result);
+
         } catch (error) {
             alert("Error submitting solution. Please try again.");
             console.error(error);
@@ -152,11 +169,25 @@ export default function CandidateSolvePage() {
                         onChange={(e) => setSolution(e.target.value)}
                     />
 
-                    <div className="mt-6">
+                    <div className="mb-4 mt-4">
+                         <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">
+                            Candidate Email
+                        </label>
+                        <input 
+                            type="email"
+                            required
+                            placeholder="you@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full p-3 border border-gray-200 rounded-lg text-sm text-black focus:ring-2 focus:ring-black focus:border-transparent outline-none bg-white transition-colors"
+                        />
+                    </div>
+
+                    <div>
                         <button 
                             onClick={handleSubmit}
-                            disabled={isSubmitting || !solution.trim()}
-                            className="w-full bg-black text-white py-4 rounded-xl font-bold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            disabled={isSubmitting || !solution.trim() || !email.trim()}
+                            className="w-full bg-gray-500 text-white py-4 rounded-xl font-bold hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                         >
                             {isSubmitting ? (
                                 <span className="flex items-center justify-center gap-2">
