@@ -4,6 +4,12 @@ export default interface EvaluationScreenProps {
         strengths: string[];
         gaps: string[];
         summary: string;
+        signals: {
+            systemThinking: number;
+            debugging: number;
+            communication: number;
+            riskAwareness: number;
+        };
     };
     onTryAnother: () => void;
 }
