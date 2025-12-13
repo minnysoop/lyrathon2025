@@ -142,11 +142,11 @@ export default function CandidateSolvePage() {
                 <div className="flex-1 flex flex-col max-w-xl mx-auto w-full">
                     <div className="mb-4">
                         <h2 className="font-bold text-lg">Architecture Plan</h2>
-                        <p className="text-sm text-gray-500">How would you approach this? (No code required)</p>
+                        <p className="text-lg text-gray-500">How would you approach this? (No code required)</p>
                     </div>
 
                     <textarea 
-                        className="flex-1 w-full p-4 border border-gray-200 rounded-xl font-mono text-sm focus:ring-2 focus:ring-black focus:border-transparent outline-none resize-none bg-gray-50 focus:bg-white transition-colors"
+                        className="flex-1 w-full p-4 border border-gray-200 rounded-xl font-mono text-sm text-black focus:ring-2 focus:ring-black focus:border-transparent outline-none resize-none bg-gray-50 focus:bg-white transition-colors"
                         placeholder="1. Diagnosis Strategy...&#10;2. Proposed Fix...&#10;3. Testing Plan..."
                         value={solution}
                         onChange={(e) => setSolution(e.target.value)}
