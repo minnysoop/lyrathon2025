@@ -52,9 +52,18 @@ function generateEvaluation(solution: string): Evaluation {
             ? "This response shows solid engineering fundamentals and practical problem-solving skills. With more depth on system-level concerns, this could reach senior-level quality."
             : "This response demonstrates basic understanding of the problem. Consider expanding on debugging methodology, edge cases, and system-level implications to strengthen the answer.";
 
-    return { level, strengths, gaps, summary };
+
+    const signals = {
+        systemThinking: hasEdgeCases ? 4 : 2,
+        debugging: hasDebugging ? 4 : 2,
+        communication: wordCount > 80 ? 4 : wordCount > 50 ? 3 : 2,
+        riskAwareness: hasTesting ? 3 : 1,
+    };
+
+    return { level, strengths, gaps, summary, signals };
 }
 
+// TODO: add signals for recruiter judgement (see loc 56-60)
 export async function evaluate(ticketContext: string, userSolution: string) {
     const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY });
 
@@ -71,7 +80,7 @@ export async function evaluate(ticketContext: string, userSolution: string) {
         Analyze the Candidate Solution below against the Ticket Context.
         Be strict. Do not give participation trophies.
         `;
-    
+
     const userPrompt = `
         --- TICKET CONTEXT ---
         ${ticketContext}
@@ -92,7 +101,7 @@ export async function evaluate(ticketContext: string, userSolution: string) {
     // });
 
     // const data = response.text; 
-    
+
     // if (!data) {
     //     throw new Error("AI returned empty response");
     // }

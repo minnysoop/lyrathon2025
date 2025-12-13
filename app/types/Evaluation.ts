@@ -3,4 +3,10 @@ export default interface Evaluation {
     strengths: string[];
     gaps: string[];
     summary: string;
+    signals: {
+        systemThinking: number;
+        debugging: number;
+        communication: number;
+        riskAwareness: number;
+    };
 }

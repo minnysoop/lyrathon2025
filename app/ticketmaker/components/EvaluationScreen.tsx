@@ -2,6 +2,63 @@ import { CheckCircle, AlertTriangle } from "lucide-react";
 
 import EvaluationScreenProps from "@/app/props/EvaluationScreenProps";
 
+// function SignalBar({ label, score }: { label: string; score: number }) {
+//     return (
+//         <div>
+//             <div className="flex justify-between text-sm mb-1">
+//                 <span className="text-foreground">{label}</span>
+//                 <span className="text-muted-foreground">{score}/5</span>
+//             </div>
+//             <div className="h-2 w-full bg-border rounded">
+//                 <div
+//                     className="h-2 rounded bg-primary transition-all"
+//                     style={{ width: `${(score / 5) * 100}%` }}
+//                 />
+//             </div>
+//         </div>
+//     );
+// }
+
+function SignalBar({ label, score }: { label: string; score: number }) {
+    // Map score to color
+    const getColor = (score: number) => {
+        switch (score) {
+            case 1:
+                return "#EF4444"; // red
+            case 2:
+                return "#F97316"; // orange
+            case 3:
+                return "#FACC15"; // yellow
+            case 4:
+                return "#86EFAC"; // light green
+            case 5:
+                return "#16A34A"; // dark green
+            default:
+                return "#D1D5DB"; // gray fallback
+        }
+    };
+
+    return (
+        <div className="mb-4">
+            <div className="flex justify-between items-center mb-1 text-sm">
+                <span className="text-foreground">{label}</span>
+                <span className="text-muted-foreground">{score}/5</span>
+            </div>
+            <div className="h-4 w-full bg-gray-200 rounded">
+                <div
+                    className="h-4 rounded transition-all"
+                    style={{
+                        width: `${(score / 5) * 100}%`,
+                        backgroundColor: getColor(score),
+                    }}
+                />
+            </div>
+        </div>
+    );
+}
+
+
+
 export function EvaluationScreen({ evaluation, onTryAnother }: EvaluationScreenProps) {
     return (
         <div className="min-h-screen flex flex-col">
@@ -17,6 +74,32 @@ export function EvaluationScreen({ evaluation, onTryAnother }: EvaluationScreenP
                                 {evaluation.level}
                             </div>
                         </div>
+
+                        <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+                            <h3 className="text-xl mb-6 text-foreground">
+                                Hiring Signal Breakdown
+                            </h3>
+
+                            <div className="space-y-4">
+                                <SignalBar
+                                    label="System Thinking"
+                                    score={evaluation.signals.systemThinking}
+                                />
+                                <SignalBar
+                                    label="Debugging Approach"
+                                    score={evaluation.signals.debugging}
+                                />
+                                <SignalBar
+                                    label="Communication Clarity"
+                                    score={evaluation.signals.communication}
+                                />
+                                <SignalBar
+                                    label="Risk Awareness (Idempotency, Testing)"
+                                    score={evaluation.signals.riskAwareness}
+                                />
+                            </div>
+                        </div>
+
 
                         <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
                             <h3 className="text-xl mb-4 text-foreground flex items-center gap-2">
