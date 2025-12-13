@@ -6,7 +6,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAsE0Iy-ryBHY0ePSeI_k_UrTP93OVNW3o",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "lyrathon2025.firebaseapp.com",
   projectId: "lyrathon2025",
   storageBucket: "lyrathon2025.firebasestorage.app",
