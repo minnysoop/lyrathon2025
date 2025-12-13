@@ -27,20 +27,31 @@ export async function generate(input: string) {
         - task: A specific technical instruction on what needs to be solved (e.g., "Diagnose the state management issue and propose a fix that persists cart data").
     `;
 
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: systemInstruction + "\n\n" + input,
-        config: {
-            responseMimeType: "application/json",
-            responseSchema: ticketSchema,
-        }
-    });
+    // const response = await ai.models.generateContent({
+    //     model: "gemini-2.5-flash",
+    //     contents: systemInstruction + "\n\n" + input,
+    //     config: {
+    //         responseMimeType: "application/json",
+    //         responseSchema: ticketSchema,
+    //     }
+    // });
 
-    const data = response.text; 
+    // const data = response.text; 
     
-    if (!data) {
-        throw new Error("AI returned empty response");
-    }
+    // if (!data) {
+    //     throw new Error("AI returned empty response");
+    // }
 
-    return JSON.parse(data);
+    // return JSON.parse(data);
+    return {
+            title: "🔐 Implement OAuth refresh token rotation",
+            project: "Authentication Service",
+            stack: "Node.js, Express, JWT, Redis",
+            priority: "Critical",
+            context: `We need to implement refresh token rotation to improve
+security. Currently, refresh tokens never expire and
+aren't tracked server-side.`,
+            task: `Describe the architecture changes needed and how you'd
+handle edge cases like concurrent refresh requests.`
+        }
 }
