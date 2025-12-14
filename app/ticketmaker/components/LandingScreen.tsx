@@ -5,10 +5,10 @@ export function LandingScreen({ jobDescription, setJobDescription, onGenerate }:
         <div className="flex flex-col">
             <div className="flex-1 flex items-center justify-center px-6 py-12">
                 <div className="w-full max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-                    
+
                     <div className="text-center mb-12 space-y-2">
                         <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl dark:text-white leading-tight">
-                            Stop reversing binary trees. <br/>
+                            Stop grinding Leetcode. <br />
                             <span className="text-zinc-500 dark:text-zinc-400">
                                 Start solving real tickets.
                             </span>
@@ -30,7 +30,7 @@ export function LandingScreen({ jobDescription, setJobDescription, onGenerate }:
                                 className="w-full h-48 p-4 text-base bg-zinc-50 dark:bg-zinc-950/50 border border-zinc-200 dark:border-zinc-800 rounded-xl text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white focus:border-transparent resize-none transition-all"
                             />
                         </div>
-                        
+
                         <div className="px-6 pb-6">
                             <button
                                 onClick={onGenerate}
