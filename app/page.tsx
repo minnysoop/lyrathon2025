@@ -46,9 +46,16 @@ export default function Home() {
             </svg>
           </Link>
         </div>
-
+        <div className="text-m text-zinc-400 font-medium">
+            Are you a recruiter?{' '}
+            <Link 
+              href="/login" 
+              className="text-zinc-800 underline decoration-zinc-300 underline-offset-4 transition-colors hover:text-black hover:decoration-black dark:text-zinc-200 dark:decoration-zinc-600 dark:hover:text-white"
+            >
+              Sign in
+            </Link>
+          </div>
       </div>
-
     </div>
   );
 }
