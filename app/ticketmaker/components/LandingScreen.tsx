@@ -8,7 +8,7 @@ export function LandingScreen({ jobDescription, setJobDescription, onGenerate }:
                     
                     <div className="text-center mb-12 space-y-2">
                         <h1 className="text-4xl font-extrabold tracking-tight text-zinc-900 sm:text-5xl dark:text-white leading-tight">
-                            Stop reversing binary trees. <br/>
+                            Stop reversing linked lists.<br/>
                             <span className="text-zinc-500 dark:text-zinc-400">
                                 Start solving real tickets.
                             </span>
