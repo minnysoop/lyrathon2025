@@ -89,23 +89,23 @@ export async function evaluate(ticketContext: string, userSolution: string) {
         ${userSolution}
     `;
 
-    // const response = await ai.models.generateContent({
-    //     model: "gemini-2.5-flash",
-    //     contents: [
-    //             { role: "user", parts: [{ text: systemPrompt }, { text: userPrompt }] }
-    //         ],
-    //     config: {
-    //                 responseMimeType: "application/json",
-    //                 responseSchema: evaluationSchema,
-    //             }
-    // });
+    const response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: [
+                { role: "user", parts: [{ text: systemPrompt }, { text: userPrompt }] }
+            ],
+        config: {
+                    responseMimeType: "application/json",
+                    responseSchema: evaluationSchema,
+                }
+    });
 
-    // const data = response.text; 
+    const data = response.text; 
 
-    // if (!data) {
-    //     throw new Error("AI returned empty response");
-    // }
+    if (!data) {
+        throw new Error("AI returned empty response");
+    }
 
-    // return JSON.parse(data);
-    return generateEvaluation("")
+    return JSON.parse(data);
+    // return generateEvaluation("")
 }
